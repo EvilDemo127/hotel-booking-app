@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install system dependencies, ca-certificates, curl, and tools needed for NodeSource
+# Install system dependencies and ALL required PHP extensions including pgsql
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     zlib1g-dev \
@@ -14,21 +14,16 @@ RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     git \
-    ca-certificates \
-    gnupg
-
-# Install Node.js using the correct official Debian repository setup script
-RUN mkdir -p /etc/apt/keyrings \
-    && curl -fsSL https://nodesource.com | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://nodesource.com nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
-    && apt-get update && apt-get install -y nodejs
-
-# Install PHP Extensions
-RUN docker-php-ext-configure gd \
+    && docker-php-ext-configure gd \
     && docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip exif pcntl bcmath gd ctype fileinfo xml
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
+
+# 🌟 MAGIC LINE: Copy official Node.js and NPM directly from the official node image
+# ဒါဆိုရင် NodeSource setup တွေ လုပ်စရာမလိုဘဲ Node 18 ကို တန်းရပါမယ် (Error လုံးဝမတက်နိုင်တော့ပါ)
+COPY --from=node:18 /usr/local/bin /usr/local/bin
+COPY --from=node:18 /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 # Update Apache VirtualHost configuration directly to allow overrides and set document root
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
