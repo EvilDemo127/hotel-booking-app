@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install system dependencies, nodejs, npm, and ALL required PHP extensions
+# Install system dependencies, ca-certificates, curl, and tools needed for NodeSource
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     zlib1g-dev \
@@ -13,11 +13,15 @@ RUN apt-get update && apt-get install -y \
     zip \
     curl \
     unzip \
-    git
+    git \
+    ca-certificates \
+    gnupg
 
-# Install Node.js separate to avoid complex bash syntax errors
-RUN curl -fsSL https://nodesource.com | bash - \
-    && apt-get install -y nodejs
+# Install Node.js using the correct official Debian repository setup script
+RUN mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://nodesource.com | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://nodesource.com nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update && apt-get install -y nodejs
 
 # Install PHP Extensions
 RUN docker-php-ext-configure gd \
