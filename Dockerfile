@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install system dependencies and ALL required PHP extensions including pgsql
+# Install system dependencies, nodejs, npm, and ALL required PHP extensions
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     zlib1g-dev \
@@ -13,8 +13,14 @@ RUN apt-get update && apt-get install -y \
     zip \
     curl \
     unzip \
-    git \
-    && docker-php-ext-configure gd \
+    git
+
+# Install Node.js separate to avoid complex bash syntax errors
+RUN curl -fsSL https://nodesource.com | bash - \
+    && apt-get install -y nodejs
+
+# Install PHP Extensions
+RUN docker-php-ext-configure gd \
     && docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip exif pcntl bcmath gd ctype fileinfo xml
 
 # Enable Apache rewrite module
@@ -43,6 +49,9 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+
+# Install Frontend dependencies and Build assets for Laravel Breeze
+RUN npm install && npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
