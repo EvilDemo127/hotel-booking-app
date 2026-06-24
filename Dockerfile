@@ -20,13 +20,16 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Set Document Root to public folder
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
+# Update Apache VirtualHost configuration directly to allow overrides and set document root
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+RUN sed -i 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf
 
-# Crucial Fix: Update Apache configuration to allow .htaccess overrides for Laravel routes
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+# Force Apache to allow .htaccess on the public directory specifically
+RUN echo '<Directory /var/www/html/public>\n\
+    Options Indexes FollowSymLinks\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>' >> /etc/apache2/apache2.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
