@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Install system dependencies and ALL required PHP extensions for Laravel 12
+# Install system dependencies and ALL required PHP extensions including pgsql
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     zlib1g-dev \
@@ -9,12 +9,13 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libcurl4-openssl-dev \
     libsqlite3-dev \
+    libpq-dev \
     zip \
     curl \
     unzip \
     git \
     && docker-php-ext-configure gd \
-    && docker-php-ext-install pdo_mysql pdo_sqlite mbstring zip exif pcntl bcmath gd ctype fileinfo xml
+    && docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip exif pcntl bcmath gd ctype fileinfo xml
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
@@ -34,7 +35,7 @@ COPY . .
 # Set Composer environment variable to allow superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# Install PHP dependencies ignoring platform requirements temporarily to prevent exit code 1
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Set permissions
