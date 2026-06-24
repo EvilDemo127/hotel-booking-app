@@ -40,5 +40,9 @@ RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Run migrations automatically before launching Apache
+CMD php artisan migrate --force && apache2-foreground
+
+
 
 EXPOSE 80
