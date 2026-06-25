@@ -9,12 +9,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        if(auth()->check() && auth()->user()->role == 'admin')
-            {
-                $bookings =Booking::all();
-                return view('admin.index',['bookings'=>$bookings]);
-            }else{
-                return view('home.index');
-            }
+        $bookings =Booking::all();
+        return view('admin.index',['bookings'=>$bookings]);
     }
 }

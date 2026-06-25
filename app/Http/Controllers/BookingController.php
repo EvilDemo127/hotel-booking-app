@@ -20,5 +20,18 @@ class BookingController extends Controller
         $bookings =Booking::all();
         return view('admin.update_booking',['bookings'=>$bookings]);
     }
+
+    public function update_booking($id)
+    {
+        $booking = Booking::find($id);
+        $booking->status = request()->status;
+            if(request()->status == 'delete')
+                {
+                    $booking->delete();
+                    return redirect()->back()->with('info','delete success');
+                }
+        $booking->save();
+        return redirect()->back()->with('info','updating success');
+    }
 }
 

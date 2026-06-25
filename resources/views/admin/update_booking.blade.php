@@ -86,13 +86,14 @@
                                         class="absolute right-0 z-50 mt-2 w-40 origin-top-right rounded-lg bg-slate-800 shadow-2xl border border-slate-700 py-1" 
                                         style="display: none;"
                                     >
-                                        <form action="" method="POST">
+                                        <form action="{{route('update_booking',$booking->id)}}" method="POST">
                                             @csrf
                                             
                                             <div class="flex flex-col">
                                                 <button type="submit" name="status" value="pending" class="text-left px-4 py-2 text-xs font-medium text-yellow-400 hover:bg-slate-700/50 transition duration-150">Pending</button>
                                                 <button type="submit" name="status" value="confirmed" class="text-left px-4 py-2 text-xs font-medium text-emerald-400 hover:bg-slate-700/50 transition duration-150">Confirmed</button>
                                                 <button type="submit" name="status" value="canceled" class="text-left px-4 py-2 text-xs font-medium text-red-400 hover:bg-slate-700/50 transition duration-150">Canceled</button>
+                                                <button type="submit" name="status" value="delete" class="text-left px-4 py-2 text-xs font-medium text-red-400 hover:bg-slate-700/50 transition duration-150">Delete</button>
                                             </div>
                                         </form>
                                     </div>

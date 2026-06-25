@@ -10,6 +10,7 @@ class Booking extends Model
         'name',
         'email',
         'phone',
+        'stauts',
         'check_in',
         'check_out'
     ];
