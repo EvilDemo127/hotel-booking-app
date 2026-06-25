@@ -9,6 +9,7 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class RoomController extends Controller
 {
     public function create_room()
@@ -16,11 +17,9 @@ class RoomController extends Controller
         return view('admin.create_room');
     }
 
-    use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // အပေါ်ဆုံးတွင် ပါဝင်ကြောင်း သေချာပါစေ
 
 public function store_room(StoreRoomRequest $request)
 {
-    // ၁။ ဝင်လာသော Data များကို အရင်စစ်ထုတ်ပါ
     $valiRoom = $request->validated();
 
     if ($request->hasFile('image')) {
