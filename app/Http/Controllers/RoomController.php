@@ -19,7 +19,6 @@ class RoomController extends Controller
     public function store_room(StoreRoomRequest $request)
     {
         $valiRoom = $request->validated();
-        $name =$valiRoom['room_name'] . '-' .time(). '.' . $request->file('image')->getClientOriginalExtension();
         $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
             'folder' => 'rooms'
         ])->getSecurePath(); 
