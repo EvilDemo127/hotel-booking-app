@@ -16,17 +16,29 @@ class RoomController extends Controller
         return view('admin.create_room');
     }
 
-    public function store_room(StoreRoomRequest $request)
-    {
-        $valiRoom = $request->validated();
+    use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // အပေါ်ဆုံးတွင် ပါဝင်ကြောင်း သေချာပါစေ
+
+public function store_room(StoreRoomRequest $request)
+{
+    // ၁။ ဝင်လာသော Data များကို အရင်စစ်ထုတ်ပါ
+    $valiRoom = $request->validated();
+
+    if ($request->hasFile('image')) {
+        
         $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
             'folder' => 'rooms'
         ])->getSecurePath(); 
-        
-        $valiRoom['image'] =$uploadedFileUrl;
-        Room::create($valiRoom);
-        return redirect()->back()->with('info','Success Creating Room');
+
+        $valiRoom['image'] = $uploadedFileUrl; 
+    } else {
+        $valiRoom['image'] = null;
     }
+
+    Room::create($valiRoom);
+
+    return redirect()->back()->with('info', 'Success Creating Room with Cloudinary!');
+}
+
 
     public function view_room()
     {
