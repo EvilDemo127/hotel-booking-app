@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoomRequest;
-use App\Http\Requests\UpdateBookingRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,8 +20,11 @@ class RoomController extends Controller
     {
         $valiRoom = $request->validated();
         $name =$valiRoom['room_name'] . '-' .time(). '.' . $request->file('image')->getClientOriginalExtension();
-        $request->file('image')->storeAs('rooms',$name,'public');
-        $valiRoom['image'] ='rooms/'.$name;
+        $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
+            'folder' => 'rooms'
+        ])->getSecurePath(); 
+        
+        $valiRoom['image'] =$uploadedFileUrl;
         Room::create($valiRoom);
         return redirect()->back()->with('info','Success Creating Room');
     }
