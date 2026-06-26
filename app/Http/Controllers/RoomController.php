@@ -18,25 +18,24 @@ class RoomController extends Controller
     }
 
 
-public function store_room(StoreRoomRequest $request)
-{
-    $valiRoom = $request->validated();
+    public function store_room(StoreRoomRequest $request)
+    {
+        $valiRoom = $request->validated();
+        if ($request->hasFile('image')) {
+            // $uploadedFileUrl = Cloudinary::upload($request->file('image'), [
+            //     'folder' => 'rooms'
+            // ])->getSecurePath(); 
+            $name = $valiRoom['room_name'] . '.' . time() . '.' . request()->file('image')->getClientOriginalExtension();
+            request()->file('image')->storeAs('rooms',$name,'public');
+            $valiRoom['image'] ='rooms/'.$name; 
 
-    if ($request->hasFile('image')) {
-        
-        $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath(), [
-            'folder' => 'rooms'
-        ])->getSecurePath(); 
+        } else {
+            $valiRoom['image'] = null;
+        }
 
-        $valiRoom['image'] = $uploadedFileUrl; 
-    } else {
-        $valiRoom['image'] = null;
+        Room::create($valiRoom);
+        return redirect()->back()->with('info', 'Success Creating Room!');
     }
-
-    Room::create($valiRoom);
-
-    return redirect()->back()->with('info', 'Success Creating Room with Cloudinary!');
-}
 
 
     public function view_room()

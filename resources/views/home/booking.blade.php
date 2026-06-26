@@ -1,9 +1,9 @@
 @extends('home.home')
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 rounded-2xl">
-    
-    {{-- <div class="relative md:col-span-5 rounded-xl shadow-lg border border-slate-700 bg-gray-600 ">
-            <img src="{{asset('storage/' . $room->image)}}" 
+
+    <div class="relative md:col-span-5 rounded-xl shadow-lg border border-slate-700 bg-gray-600 ">
+            <img src="{{asset('storage/'.$room->image)}}" 
              class="w-100 h-100 rounded-lg shadow-lg">
              <span class="absolute top-3 right-3 bg-blue-500 rounded-xl px-2 py-1 text-xs font-bold uppercase text-white">{{$room->room_type}}</span>
              <div class="flex flex-col gap-3">
@@ -13,7 +13,7 @@
                 </div>
                     <p class="text-gray-200 p-2">{{$room->description}}</p>
             </div>
-    </div> --}}
+    </div>
     
     <div class="md:col-span-7 p-4 flex flex-col gap-4">
         

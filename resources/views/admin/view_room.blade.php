@@ -14,7 +14,7 @@
             @foreach ($rooms as $room)
                 <div class="rounded-xl border border-slate-700 bg-slate-900 shadow-lg overflow-hidden">
                     <div class="relative w-full h-30">
-                        <img src="{{$room->image}}" alt="">
+                        <img src="{{asset('storage/'.$room->image)}}" alt="">
                         <span class="absolute top-3 right-3 bg-blue-500 rounded-xl px-2 py-1 text-xs font-bold uppercase text-white">
                             {{ $room->room_type }}
                         </span>

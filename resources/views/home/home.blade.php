@@ -16,7 +16,7 @@
                 <span class="sr-only">HOTEL </span>
             </a>
             <div class="uppercase">
-                <a href="" class="px-4 py-2 text-white rounded-lg hover:bg-gray-600">home</a>
+                <a href="{{route('home')}}" class="px-4 py-2 text-white rounded-lg hover:bg-gray-600">home</a>
                 <a href="" class="px-4 py-2 text-white rounded-lg hover:bg-gray-600">about</a>
                 <a href="" class="px-4 py-2 text-white rounded-lg hover:bg-gray-600">contact us</a>
                 <a href="" class="px-4 py-2 text-white rounded-lg hover:bg-gray-600">Booking</a>

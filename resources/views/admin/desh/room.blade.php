@@ -23,7 +23,7 @@
                                 <span class="text-green-300">${{$room->price}}</span>
                             </div>
                             <p class="text-gray-200">{{Str::limit($room->description,35)}}</p>
-                            @if (Request::is ('home'))
+                            @if (Request::is('/'))
                                 <a href="{{route('booking',$room->id)}}" class="text-gray-300">see details</a>
                             @else
                                  <a href="" class="text-gray-300">see details</a>   

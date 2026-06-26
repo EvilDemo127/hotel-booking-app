@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -32,6 +33,12 @@ class BookingController extends Controller
                 }
         $booking->save();
         return redirect()->back()->with('info','updating success');
+    }
+
+    public function booking($id)
+    {
+        $room = Room::find($id);
+        return view('home.booking',['room'=>$room]);
     }
 }
 

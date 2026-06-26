@@ -2,19 +2,21 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home.index');
-});
+Route::get('/', [AdminController::class,'home'])->name('home');
 Route::get('/admin', [AdminController::class, 'index'])->middleware(['auth'])->name('admin');
+
 
 
 
 Route::get('booking_detail', [BookingController::class, 'booking_detail'])->middleware(['auth'])->name('booking_detail');
 Route::post('update_booking/{id}', [BookingController::class, 'update_booking'])->middleware(['auth'])->name('update_booking');
+Route::get('booking/{id}',[BookingController::class,'booking'])->name('booking');
+
 Route::post('store_room', [RoomController::class, 'store_room'])->middleware(['auth'])->name('store_room');
 Route::get('create_room',[RoomController::class,'create_room'])->middleware('auth')->name('create_room');
 Route::get('view_room',[RoomController::class,'view_room'])->middleware('auth')->name('view_room');
@@ -22,10 +24,11 @@ Route::get('edit_room/{id}',[RoomController::class,'edit_room'])->middleware('au
 Route::post('update_room/{id}',[RoomController::class,'update_room'])->middleware('auth')->name('update_room');
 Route::post('delete_room/{id}',[RoomController::class,'delete_room'])->middleware('auth')->name('delete_room');
 
+Route::get('gallery',[GalleryController::class,'gallery'])->middleware('auth')->name('gallery');
+Route::post('upload_photo',[GalleryController::class,'upload_photo'])->middleware('auth')->name('upload_photo');
+Route::post('delete_photo/{id}',[GalleryController::class,'delete_photo'])->middleware('auth')->name('delete_photo');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
