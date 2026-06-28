@@ -13,16 +13,16 @@
         <form action="{{route('store_room')}}" method="POST" enctype="multipart/form-data">
             @csrf
            <div class="flex flex-col gap-4 p-5">
-                <div class="w-100 md:w-1/2">
+                <div class="">
                     <label class="text-xs font-semibold tracking-wide uppercase text-gray-400 block mb-1">Room Name</label>
                     <input type="text" class="w-full p-3 rounded-lg bg-slate-700 text-gray-200 border border-slate-700 autofill:shadow-[inset_0_0_0_1000px_theme(colors.slate.700)] autofill:[-webkit-text-fill-color:theme(colors.gray.200)]" name="room_name" value="{{old('room_name')}}">
                 </div>
 
-                <div class="w-100 md:w-1/2">
+                <div class="">
                     <label class="text-xs font-semibold tracking-wide uppercase text-gray-400 block mb-1">Description</label>
                     <textarea type="email"  class="w-full p-3 rounded-lg  bg-slate-700 text-gray-200 border border-slate-700 autofill:shadow-[inset_0_0_0_1000px_theme(colors.slate.700)] autofill:[-webkit-text-fill-color:theme(colors.gray.200)]" name="description"> {{old('description')}}</textarea>
                 </div>
-                    <div class="w-full md:w-1/2">
+                    <div class="">
                         <label class="text-xs font-semibold tracking-wide uppercase text-gray-400 block mb-1">Price</label>
                         
                         <div class="relative flex items-center">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                <div class="w-100 md:w-1/2">
+                <div class="">
                     <label class="text-xs font-semibold tracking-wide uppercase text-gray-400 block mb-1">Room Type</label>
                     <select name="room_type" id="" class="w-full p-3 rounded-lg border border-slate-700 bg-slate-700 text-gray-300">
                         <option value="single">Single</option>
@@ -41,7 +41,7 @@
                     </select>
                 </div>
 
-                <div class="w-100 md:w-1/2">
+                <div class="">
                     <label class="text-xs font-semibold tracking-wide uppercase text-gray-400 block mb-1">Wifi</label>
                     <select name="wifi" id="" class="w-full p-3 rounded-lg border border-slate-700 bg-slate-700 text-gray-200">
                         <option value="yes">Yes</option>
@@ -49,7 +49,7 @@
                     </select>
                 </div>
 
-                <div class="w-fulll md:w-1/2">
+                <div class="">
                     <label class="text-xs font-semibold tracking-wide uppercase text-gray-400 block mb-1">Image</label>
                     <input type="file"  class="w-full p-2 rounded-lg border border-slate-700 bg-slate-800 text-gray-300  file:rounded-md file:border-0  file:bg-slate-700 file:text-gray-200" name="image" >
                 </div>

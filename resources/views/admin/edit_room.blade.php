@@ -1,6 +1,6 @@
 @extends('admin.main')
 @section('content')
-    <div class="rounded-xl border border-slate-700 ">
+    <div class="rounded-xl border border-slate-700">
         <h1 class="p-2 text-xl font-bold uppercase text-gray-200 text-center border-b border-slate-700 pb-2"> Rooms</h1>
         @if ($errors->any())
             @foreach ($errors->all() as $error)
@@ -10,11 +10,11 @@
         @if (session('info'))
             <p class="text-white">{{session('info')}}</p>
         @endif
-        <div class="flex flex-col p-5 items-center">
+        <div class="flex flex-col p-5 ">
             <form action="{{route('update_room',$room->id)}}" class="p-3" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="">
-                    <img src="{{ asset('storage/' . $room->image) }}" alt="">
+                    <img src="https://lh3.googleusercontent.com/d/{{$room->image}}" alt="" class="">
                     
                 </div>
                 <div class=" mt-3">

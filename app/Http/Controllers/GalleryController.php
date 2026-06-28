@@ -2,35 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\GalleryRequest;
+use Google\Service\Drive\DriveFile;
+use Google\Service\Drive;
 
 class GalleryController extends Controller
 {
-    public function gallery()
+    private function getGoogleDriveService()
     {
-        $images = Gallery::all();
-        return view('admin.gallery',['images'=>$images]);
+        $client = new \Google\Client();
+        $client->setClientId(env('GOOGLE_DRIVE_CLIENT_ID'));
+        $client->setClientSecret(env('GOOGLE_DRIVE_CLIENT_SECRET'));
+        $client->refreshToken(env('GOOGLE_DRIVE_REFRESH_TOKEN'));
+        return new Drive($client);
     }
 
     public function upload_photo(GalleryRequest $request)
     {
         $gallery = $request->validated();
-        $name = time(). '.'.$request->file('image')->getClientOriginalExtension();
-        $request->file('image')->storeAs('gallerys',$name,'public');
-        $gallery['image']='gallerys/'.$name;
-        Gallery::create($gallery);
-        return redirect()->back()->with('info','Success upload');
+
+        if ($request->hasFile('image')) {
+            $service = $this->getGoogleDriveService();
+
+            $fileMetadata = new DriveFile([
+                'name' => time() . '_' . $request->file('image')->getClientOriginalName(),
+                'parents' => [env('GOOGLE_DRIVE_GALLERY_FOLDER_ID')] 
+            ]);
+
+            $content = file_get_contents($request->file('image')->getRealPath());
+
+            $file = $service->files->create($fileMetadata, [
+                'data' => $content,
+                'mimeType' => $request->file('image')->getMimeType(),
+                'uploadType' => 'multipart',
+                'fields' => 'id'
+            ]);
+
+            $permission = new \Google\Service\Drive\Permission([
+                'type' => 'anyone',
+                'role' => 'reader'
+            ]);
+            $service->permissions->create($file->id, $permission);
+
+            $gallery['image'] = $file->id;
+            Gallery::create($gallery);
+
+            return redirect()->back()->with('info', 'Success upload to Google Drive Cloud natively!');
+        }
+
+        return redirect()->back();
     }
 
     public function delete_photo($id)
     {
-        $photo =Gallery::findOrFail($id);
-        Storage::disk('public')->delete($photo->image);
+        $photo = Gallery::findOrFail($id);
+        $fileId = $photo->image;
+        $service = $this->getGoogleDriveService();
+        $service->files->delete($fileId);
         $photo->delete();
-        return redirect()->back()->with('info','Deleting Success');
+        return redirect()->back()->with('info', 'Deleting Success!');
+    }
+
+    public function gallery()
+    {
+        $images = Gallery::all();
+        return view('admin.gallery',['images'=>$images]);
     }
 }
+
+
+
+ 

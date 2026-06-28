@@ -1,4 +1,4 @@
- <div class="p-6 bg-slate-900 rounded-2xl shadow-xl border border-slate-800 ">
+ <div class="p-6 bg-slate-900 border-b border-slate-700">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold uppercase tracking-wider text-gray-400">Customer Bookings</h2>
     </div>

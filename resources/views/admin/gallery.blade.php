@@ -23,7 +23,9 @@
         <div class="grid grid-cols-3 gap-3 p-1">
             @foreach ($images as $image)
                 <div class="rounded-xl overflow-hidden">
-                    <img src="{{asset('storage/'.$image->image)}}" alt="" class="w-full h-40 sm:h-48">
+               <img src="https://lh3.googleusercontent.com/d/{{ $image->image }}" alt="" class="w-full h-40 sm:h-48">
+                    {{-- <img src="https://lh3.google.com/d/{{ $image->image }}" alt="" class="w-full h-40 sm:h-48"> --}}
+
                     <form action="{{route('delete_photo',$image->id)}}" method="POST">
                         @csrf
                         <button class="p-1.5 my-2 w-full rounded-lg text-red-300 hover:bg-red-300 hover:text-gray-700">Delete</button>

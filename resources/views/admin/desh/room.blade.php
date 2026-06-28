@@ -1,5 +1,5 @@
 
-    <div class="rounded-xl border border-slate-700 ">
+    <div class="border-b border-slate-700 ">
         <h1 class="p-2 text-xl font-bold uppercase text-gray-200 text-center border-b border-slate-700 pb-2"> Rooms</h1>
         @if ($errors->any())
             @foreach ($errors->all() as $error)
@@ -13,7 +13,7 @@
             @foreach ($rooms as $room)
                 <div class="rounded-xl border border-slate-700 bg-slate-900 shadow-lg overflow-hidden">
                     <div class="relative w-full h-30">
-                        <img src="{{ asset('storage/' . $room->image) }}" alt="">
+                        <img src="https://lh3.google.com/d/{{$room->image }}" alt="" class="w-full">
                         <span class="absolute top-3 right-3 bg-blue-500 rounded-xl px-2 py-1 text-xs font-bold uppercase text-white">
                             {{ $room->room_type }}
                         </span>
@@ -26,7 +26,7 @@
                             @if (Request::is('/'))
                                 <a href="{{route('booking',$room->id)}}" class="text-gray-300">see details</a>
                             @else
-                                 <a href="" class="text-gray-300">see details</a>   
+                                 <a href="{{route('detail_room',$room->id)}}" class="text-gray-300">see details</a>   
                             @endif
                         </div>
                         
