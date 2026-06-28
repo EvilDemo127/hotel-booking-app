@@ -40,8 +40,8 @@
                         <button type="submit" class="text-red-400 hover:text-red-300 hover:underline transition">Logout</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="text-gray-300 hover:text-white transition">Login</a>
-                    <a href="{{ route('register') }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition shadow-sm">Register</a>
+                    <a href="{{ route('login') }}" class="text-gray-300 hover:text-white ">Login</a>
+                    <a href="{{ route('register') }}" class="text-gray-300 hover:text-white  ">Register</a>
                 @endauth
             </div>
 
