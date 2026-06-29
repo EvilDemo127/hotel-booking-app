@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
     <title>HOTEL</title>
      @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -19,7 +20,7 @@
                     <img src="https://images.trvl-media.com/lodging/84000000/83530000/83526600/83526593/80723385.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" 
                          alt="Hotel Logo" 
                          class="w-10 h-10 object-cover rounded-full border border-gray-600 shadow-sm">
-                    <span class="text-white font-bold text-lg tracking-wider hidden sm:block">ONE HOTEL</span>
+                    <span class="text-white font-bold text-lg tracking-wider hidden sm:block">HOTEL</span>
                 </a>
             </div>
 
