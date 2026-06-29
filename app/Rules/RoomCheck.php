@@ -22,7 +22,7 @@ class RoomCheck implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $isBooking =Booking::where('room_id',$this->roomId)
+        $isBooking =Booking::where('room_name',$this->roomId)
         ->where('check_in','<=',$this->checkIn)
         ->where('check_out','>=',$this->checkOut)->exists();
 
