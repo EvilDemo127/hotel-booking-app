@@ -100,7 +100,7 @@ Follow these steps to setup the project locally on your machine:
 ## 🔑 Demo Account (Testing Credentials)
 
 To test the application instantly without registering, use the following credentials:
-- **Email:** `admin@example.com`
+- **Email:** `admin@gmail.com`
 - **Password:** `password123`
 
 ---
