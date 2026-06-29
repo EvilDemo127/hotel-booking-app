@@ -9,7 +9,7 @@
         <table class="w-full text-sm text-left text-gray-300">
             <thead class="text-xs uppercase bg-slate-800 border-b border-slate-700">
                 <tr>
-                    <th class="px-6 py-4 font-semibold">Room No</th>
+                    <th class="px-6 py-4 font-semibold">Room Name</th>
                     <th class="px-6 py-4 font-semibold">Name</th>
                     <th class="px-6 py-4 font-semibold">Email</th>
                     <th class="px-6 py-4 font-semibold">Phone</th>
@@ -22,7 +22,7 @@
             <tbody class="divide-y divide-slate-800 bg-slate-900/50">
                 @foreach ($bookings as $booking)
                     <tr class="hover:bg-slate-800/60 transition-colors duration-150">
-                        <td class="px-6 py-4 font-medium text-white">{{ $booking->room_id }}</td>
+                        <td class="px-6 py-4 font-medium text-white">{{ $booking->rooms->room_name }}</td>
                         <td class="px-6 py-4 font-semibold text-amber-100">{{ $booking->name }}</td>
                         <td class="px-6 py-4 text-gray-400">{{ $booking->email }}</td>
                         <td class="px-6 py-4">{{ $booking->phone }}</td>

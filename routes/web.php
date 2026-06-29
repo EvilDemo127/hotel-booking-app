@@ -15,7 +15,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('blog', [BlogController::class, 'blog'])->name('blog');
     Route::post('create_blog', [BlogController::class, 'create_blog'])->name('create_blog');
-    Route::post('store_booking',[BookingController::class,'store_booking'])->name('store_booking');
+    Route::post('store_booking/{id}',[BookingController::class,'store_booking'])->name('store_booking');
     Route::get('edit_blog/{id}', [BlogController::class, 'edit_blog'])->name('edit_blog');
     Route::post('update_blog/{id}', [BlogController::class, 'update_blog'])->name('update_blog');
     Route::post('update_blog/{id}', [BlogController::class, 'update_blog'])->name('update_blog');

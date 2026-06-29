@@ -57,12 +57,12 @@
         <ul>
             
             <div x-data="{ open: false }" @click.outside="open = false" class="relative inline-block text-left m-3">
-                <button @click="open = !open" class="text-white inline-flex items-center gap-1">
+                <button @click="open = !open" class="text-white inline-flex items-center gap-1 ps-1">
                     <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5h-1.875a6 6 0 0 0-11.25 0H6M21 7.5v12.25A1.25 1.25 0 0 1 19.75 21H18M21 7.5A2.25 2.25 0 0 0 18.75 5.25H16.5M3 7.5H4.875a6 6 0 0 1 11.25 0H18M3 7.5v12.25A1.25 1.25 0 0 0 4.25 21H6M3 7.5A2.25 2.25 0 0 1 5.25 5.25H7.5m10.5 15.75V12.75a1.5 1.5 0 0 0-1.5-1.5H7.5a1.5 1.5 0 0 0-1.5 1.5v8.25m12 0h-12" />
                     </svg>
 
-                    <span>Room</span>
+                    <span class="hidden sm:inline ms-3 font-medium">Room</span>
 
                 </button>
 

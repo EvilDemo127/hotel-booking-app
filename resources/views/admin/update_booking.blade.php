@@ -16,25 +16,25 @@
         <table class="w-full text-sm text-left text-gray-300 ">
             <thead class="text-xs uppercase bg-slate-800 border-b border-slate-700">
                 <tr>
-                    <th class="px-4 py-4 font-semibold">Room Id</th>
-                    <th class="px-4 py-4 font-semibold">Name</th>
-                    <th class="px-4 py-4 font-semibold">Email</th>
-                    <th class="px-4 py-4 font-semibold">Phone</th>
-                    <th class="px-9 py-4 font-semibold">Check In</th>
-                    <th class="px-9 py-4 font-semibold">Check Out</th>
-                    <th class="px- py-4 font-semibold text-center">Status</th>
+                    <th class="px-2 py-4 font-semibold">Room Id</th>
+                    <th class="px-2 py-4 font-semibold">Name</th>
+                    <th class="px-2 py-4 font-semibold">Email</th>
+                    <th class="px-2 py-4 font-semibold">Phone</th>
+                    <th class="px-2 py-4 font-semibold">Check In</th>
+                    <th class="px-2 py-4 font-semibold">Check Out</th>
+                    <th class="px-2 py-4 font-semibold text-center">Status</th>
                 </tr>
             </thead>
             
             <tbody class="divide-y divide-slate-800 bg-slate-900/50">
                 @foreach ($bookings as $booking)
                     <tr class="hover:bg-slate-800/60 transition-colors duration-150">
-                        <td class="px-4 py-4 font-medium text-white">{{ $booking->id }}</td>
-                        <td class="px-4 py-4 font-semibold text-amber-100">{{ $booking->name }}</td>
-                        <td class="px-4 py-4 text-gray-400">{{ $booking->email }}</td>
-                        <td class="px-4 py-4">{{ $booking->phone }}</td>
-                        <td class="px-4 py-4 text-emerald-400 font-medium">{{ $booking->check_in }}</td>
-                        <td class="px-4 py-4 text-red-400 font-medium">{{ $booking->check_out }}</td>
+                        <td class="px-2 py-4 font-medium text-white">{{ $booking->rooms->room_name }}</td>
+                        <td class="px-2 py-4 font-semibold text-amber-100">{{ $booking->name }}</td>
+                        <td class="px-2 py-4 text-gray-400">{{ $booking->email }}</td>
+                        <td class="px-2 py-4">{{ $booking->phone }}</td>
+                        <td class="px-2 py-4 text-emerald-400 font-medium">{{ $booking->check_in }}</td>
+                        <td class="px-2 py-4 text-red-400 font-medium">{{ $booking->check_out }}</td>
                         {{-- <td class="px-4 py-4 text-center">
                             @if ($booking->status == 'confirmed')
                               <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs rounded-full font-semibold">
@@ -50,7 +50,7 @@
                             </span>
                             @endif
                         </td> --}}
-                        <td class="px-6 py-4 text-center align-middle">
+                        <td class="px-2 py-4 text-center align-middle">
                             <div class="flex items-center justify-center w-full">
                                 
                                 <div x-data="{ open: false }" @click.away="open = false" class="relative inline-block text-left">
@@ -90,10 +90,10 @@
                                             @csrf
                                             
                                             <div class="flex flex-col">
-                                                <button type="submit" name="status" value="pending" class="text-left px-4 py-2 text-xs font-medium text-yellow-400 hover:bg-slate-700/50 transition duration-150">Pending</button>
-                                                <button type="submit" name="status" value="confirmed" class="text-left px-4 py-2 text-xs font-medium text-emerald-400 hover:bg-slate-700/50 transition duration-150">Confirmed</button>
-                                                <button type="submit" name="status" value="canceled" class="text-left px-4 py-2 text-xs font-medium text-red-400 hover:bg-slate-700/50 transition duration-150">Canceled</button>
-                                                <button type="submit" name="status" value="delete" class="text-left px-4 py-2 text-xs font-medium text-red-400 hover:bg-slate-700/50 transition duration-150">Delete</button>
+                                                <button type="submit" name="status" value="pending" class="text-left px-2 py-2 text-xs font-medium text-yellow-400 hover:bg-slate-700/50 transition duration-150">Pending</button>
+                                                <button type="submit" name="status" value="confirmed" class="text-left px-2 py-2 text-xs font-medium text-emerald-400 hover:bg-slate-700/50 transition duration-150">Confirmed</button>
+                                                <button type="submit" name="status" value="canceled" class="text-left px-2 py-2 text-xs font-medium text-red-400 hover:bg-slate-700/50 transition duration-150">Canceled</button>
+                                                <button type="submit" name="status" value="delete" class="text-left px-2 py-2 text-xs font-medium text-red-400 hover:bg-slate-700/50 transition duration-150">Delete</button>
                                             </div>
                                         </form>
                                     </div>

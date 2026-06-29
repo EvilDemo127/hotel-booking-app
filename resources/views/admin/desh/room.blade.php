@@ -13,7 +13,7 @@
             @foreach ($rooms as $room)
                 <div class="rounded-xl border border-slate-700 bg-slate-900 shadow-lg overflow-hidden">
                     <div class="relative w-full h-30">
-                        <img src="https://lh3.google.com/d/{{$room->image }}" alt="" class="w-full">
+                        <img src="https://lh3.googleusercontent.com/d/{{$room->image }}" alt="" class="w-full h-60 sm:h-40">
                         <span class="absolute top-3 right-3 bg-blue-500 rounded-xl px-2 py-1 text-xs font-bold uppercase text-white">
                             {{ $room->room_type }}
                         </span>

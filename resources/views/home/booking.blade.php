@@ -3,12 +3,12 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 rounded-2xl">
 
     <div class="relative md:col-span-5 rounded-xl shadow-lg border border-slate-700 bg-gray-600 ">
-            <img src="{{asset('storage/'.$room->image)}}" 
-             class="w-100 h-100 rounded-lg shadow-lg">
+            <img src="https://lh3.google.com/d/{{$room->image}}" 
+             class="w-full h-100 rounded-lg shadow-lg">
              <span class="absolute top-3 right-3 bg-blue-500 rounded-xl px-2 py-1 text-xs font-bold uppercase text-white">{{$room->room_type}}</span>
              <div class="flex flex-col gap-3">
                 <div class="flex justify-between p-3">
-                    <h4 class="text-gray-200">Room No: {{$room->room_no}}</h4>
+                    <h4 class="text-gray-200">Room Nname: {{$room->room_name}}</h4>
                     <span class="text-green-300">${{$room->price}}</span>
                 </div>
                     <p class="text-gray-200 p-2">{{$room->description}}</p>
@@ -18,7 +18,7 @@
     <div class="md:col-span-7 p-4 flex flex-col gap-4">
         
         <h2 class="text-xl font-bold uppercase tracking-wider border-b border-slate-700 pb-2">Reservation</h2>
-        <form action="{{route('store_booking')}}" method="POST">
+        <form action="{{route('store_booking',$room->id)}}" method="POST">
             @csrf
             @if ($errors->any())
                 @foreach ($errors->all() as $error)

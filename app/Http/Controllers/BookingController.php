@@ -9,9 +9,10 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function store_booking(StoreBookingRequest $request)
+    public function store_booking(StoreBookingRequest $request,$id)
     {
         $valiDate =$request->validated();
+        $valiDate['room_name']=$id;
         Booking::create($valiDate);
         return redirect()->back()->with('info','Booking Success');
     }

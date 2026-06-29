@@ -16,7 +16,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $bookings =Booking::all();
+        $bookings =Booking::with('rooms')->get();
         $rooms =Room::all();
         $images = Gallery::all();
         $blogs =Blog::all();
