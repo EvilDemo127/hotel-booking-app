@@ -20,8 +20,6 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# 🌟 MAGIC LINE: Copy official Node.js and NPM directly from the official node image
-# ဒါဆိုရင် NodeSource setup တွေ လုပ်စရာမလိုဘဲ Node 18 ကို တန်းရပါမယ် (Error လုံးဝမတက်နိုင်တော့ပါ)
 COPY --from=node:18 /usr/local/bin /usr/local/bin
 COPY --from=node:18 /usr/local/lib/node_modules /usr/local/lib/node_modules
 
@@ -47,7 +45,11 @@ COPY . .
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+RUN composer config --global repo.packagist.org false && \
+    composer config --global repository.packagist composer https://repo.packagist.org && \
+    export COMPOSER_PROCESS_TIMEOUT=600 && \
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts
+
 
 # Install Frontend dependencies and Build assets for Laravel Breeze
 RUN npm install && npm run build
@@ -57,5 +59,6 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 # Run migrations automatically before launching Apache
 CMD php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+
 
 EXPOSE 80
