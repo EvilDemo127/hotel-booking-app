@@ -45,10 +45,9 @@ COPY . .
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Install PHP dependencies
-RUN composer config --global repo.packagist.org false && \
-    composer config --global repository.packagist composer https://repo.packagist.org && \
-    export COMPOSER_PROCESS_TIMEOUT=600 && \
-    composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts
+RUN export COMPOSER_PROCESS_TIMEOUT=600 && \
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs --no-scripts --prefer-dist --no-interaction
+
 
 
 # Install Frontend dependencies and Build assets for Laravel Breeze
