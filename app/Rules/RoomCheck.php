@@ -23,8 +23,8 @@ class RoomCheck implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $isBooking =Booking::where('room_id',$this->roomId)
-        ->where('arrive_date','<=',$this->checkIn)
-        ->where('departure_date','>=',$this->checkOut)->exists();
+        ->where('check_in','<=',$this->checkIn)
+        ->where('check_out','>=',$this->checkOut)->exists();
 
         if($isBooking){
             $fail('The room is already booked for the selected dates.');
