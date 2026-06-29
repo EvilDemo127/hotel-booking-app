@@ -2,7 +2,7 @@
 
 Responsive full-stack Hotel Booking Management System built with **Laravel**, **Laravel Breeze**, **Tailwind CSS**, and integrated with **Google Drive API** for secure cloud asset storage.
 
-🌐 **Live Demo:** [View Live Site](https://onrender.com)
+🌐 **Live Demo:** [View Live Site]([https://onrender.com](https://hotel-booking-app-wvsn.onrender.com/))
 
 ---
 
@@ -41,7 +41,7 @@ Follow these steps to setup the project locally on your machine:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com
+   git clone [https://github.com](https://github.com/EvilDemo127/hotel-booking-app)
    cd YOUR_REPO_NAME
    ```
 
